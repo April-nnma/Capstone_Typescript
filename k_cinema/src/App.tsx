@@ -1,7 +1,12 @@
+import { useRoutes } from "react-router-dom";
+import { router } from "./router";
+
 function App() {
     return (
         <div>
-            <h1 className="text-3xl font-bold underline">Hello world!</h1>
+            {
+                useRoutes(router)
+            }
         </div>
     );
 }

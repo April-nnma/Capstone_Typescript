@@ -47,6 +47,14 @@ export default {
         12: '12px',
         14: '14px',
         16: '16px',
+      },
+      backgroundImage:{
+        'header': "url('./images/bg-top.png')" 
+      },
+      backgroundSize:{
+        'auto': 'auto',
+        'cover': 'cover',
+        'contain': 'contain',
       }
     },
   },
