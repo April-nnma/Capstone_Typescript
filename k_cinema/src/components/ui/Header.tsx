@@ -140,7 +140,7 @@ const PageHearderContainer = styled.header`
         display: block;
         position: absolute;
         top: 55px;
-        right: 450px;        
+        right: 450px;
         padding: 0;
         text-align: right;
         .search-header-left {
