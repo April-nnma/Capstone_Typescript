@@ -323,7 +323,7 @@ const FooterContainer = styled.header`
                         float: left;
                         margin-right: 3px;
                         a {
-                            background: url("../../../public/images/bg-social-footer-40.png");
+                            background: url("/images/bg-social-footer-40.png");
                             display: block;
                             height: 39px;
                             text-indent: -9999px;

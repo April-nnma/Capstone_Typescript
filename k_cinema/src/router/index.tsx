@@ -1,8 +1,8 @@
 import { RouteObject } from "react-router-dom";
 import { PATH } from "constant";
-import { MainLayout } from "../components";
-import { Home } from "../pages/Home";
-import { Login, Register } from "../pages";
+import { MainLayout } from "components";
+import { Home } from "pages";
+import { Login, Register } from "pages";
 
 
 

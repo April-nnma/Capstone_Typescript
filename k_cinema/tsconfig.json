@@ -26,6 +26,7 @@
       "constant": ["constant"],
       "pages": ["pages"],
       "router": ["router"],
+      "schema": ["schema"],
       "services": ["services"],
       "utils": ["utils"]
     }
