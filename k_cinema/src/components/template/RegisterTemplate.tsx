@@ -3,7 +3,11 @@ import styled from "styled-components";
 import { RegisterSchema, RegisterSchemaType } from "schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "react-toastify";
-import axios from "axios";
+import { quanLyNguoiDungServices } from "services";
+import { useNavigate } from "react-router-dom";
+import { PATH } from "constant";
+import { Input } from "components";
+import { handleErrors } from "utils";
 
 export const RegisterTemplate = () => {
     const {
@@ -16,23 +20,18 @@ export const RegisterTemplate = () => {
     });
     // console.log("errors: ", errors);
 
+    const navigate = useNavigate(); //
+
     const onSubmit: SubmitHandler<RegisterSchemaType> = async (values) => {
         try {
-            console.log("values: ", { values });
-            await axios({
-                method: "POST",
-                url: "https://movienew.cybersoft.edu.vn/api/QuanLyNguoiDung/DangKy",
-                data: values,
-                headers: {
-                    ///nhận token cyberSoft
-                    TokenCybersoft:
-                        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZW5Mb3AiOiJCb290Y2FtcCA0NyIsIkhldEhhblN0cmluZyI6IjE1LzAyLzIwMjQiLCJIZXRIYW5UaW1lIjoiMTcwNzk1NTIwMDAwMCIsIm5iZiI6MTY3ODk4NjAwMCwiZXhwIjoxNzA4MTAyODAwfQ.YGLcwOu11pM9sD9C2a0dia7O_6vvsYwkCoo1sqcbCFM",
-                },
-            });
+            // console.log("values: ", { values });
+            await quanLyNguoiDungServices.register(values);
             toast.success("Đăng ký thành công");
+            navigate(PATH.login); // đưa về trang login sau khi đăng ký thành công
         } catch (erros) {
-            console.log("erros: ", erros);
-            toast.error(erros?.response?.data?.content);
+            // console.log("erros: ", erros);
+            // toast.error(erros?.response?.data?.content);
+            handleErrors(erros)
         }
     };
 
@@ -54,7 +53,7 @@ export const RegisterTemplate = () => {
 
                         <div className="form-register-input">
                             <form onSubmit={handleSubmit(onSubmit)}>
-                                <div>
+                                {/* <div>
                                     <label
                                         htmlFor="taiKhoan"
                                         className="font-bold"
@@ -85,99 +84,62 @@ export const RegisterTemplate = () => {
                                             {errors?.taiKhoan?.message}
                                         </p>
                                     )}
-                                </div>
-                                <div>
-                                    <label
-                                        htmlFor="matKhau"
-                                        className="font-bold"
-                                    >
-                                        Mật Khẩu
-                                    </label>
-                                    <input
-                                        id="matKhau"
-                                        type="password"
-                                        placeholder="Mật Khẩu"
-                                        {...register("matKhau")}
-                                    />
-                                    {errors?.matKhau && (
-                                        <p className="text-red-500 text-14">
-                                            {errors?.matKhau?.message}
-                                        </p>
-                                    )}
-                                </div>
-                                <div>
-                                    <label
-                                        htmlFor="email"
-                                        className="font-bold"
-                                    >
-                                        Email
-                                    </label>
-                                    <input
-                                        id="email"
-                                        type="email"
-                                        placeholder="Email"
-                                        {...register("email")}
-                                    />
-                                    {errors?.email && (
-                                        <p className="text-red-500 text-14">
-                                            {errors?.email?.message}
-                                        </p>
-                                    )}
-                                </div>
-                                <div>
-                                    <label htmlFor="soDt" className="font-bold">
-                                        Số điện thoại
-                                    </label>
-                                    <input
-                                        id="soDt"
-                                        type="text"
-                                        placeholder="Số điện thoại"
-                                        {...register("soDt")}
-                                    />
-                                    {errors?.soDt && (
-                                        <p className="text-red-500 text-14">
-                                            {errors?.soDt?.message}
-                                        </p>
-                                    )}
-                                </div>
-                                <div>
-                                    <label
-                                        htmlFor="maNhom"
-                                        className="font-bold"
-                                    >
-                                        Mã nhóm
-                                    </label>
-                                    <input
-                                        id="maNhom"
-                                        type="text"
-                                        placeholder="Mã Nhóm"
-                                        {...register("maNhom")}
-                                    />
-                                    {errors?.maNhom && (
-                                        <p className="text-red-500 text-14">
-                                            {errors?.maNhom?.message}
-                                        </p>
-                                    )}
-                                </div>
-                                <div>
-                                    <label
-                                        htmlFor="hoTen"
-                                        className="font-bold"
-                                    >
-                                        Họ Tên
-                                    </label>
-                                    <input
-                                        id="hoTen"
-                                        type="text"
-                                        placeholder="Họ Tên"
-                                        {...register("hoTen")}
-                                    />
-                                    {errors?.hoTen && (
-                                        <p className="text-red-500 text-14">
-                                            {errors?.hoTen?.message}
-                                        </p>
-                                    )}
-                                </div>
+                                </div> */}
+                                <Input
+                                    label="Tài khoản"
+                                    id="taiKhoan"
+                                    type="text"
+                                    register={register}
+                                    errors={errors?.taiKhoan?.message}
+                                    placeholder="Vui lòng nhập tài khoản"
+                                    name="taiKhoan"
+                                />
+                                <Input
+                                    label="Mật Khẩu"
+                                    id="matKhau"
+                                    type="password"
+                                    register={register}
+                                    errors={errors?.matKhau?.message}
+                                    placeholder="Vui lòng nhập mật khẩu"
+                                    name="matKhau"
+                                />
+                                <Input
+                                    label="Email"
+                                    id="email"
+                                    type="email"
+                                    register={register}
+                                    errors={errors?.email?.message}
+                                    placeholder="Vui lòng nhập email"
+                                    name="email"
+                                />
+
+                                <Input
+                                    label="Số điện thoại"
+                                    id="soDt"
+                                    type="text"
+                                    register={register}
+                                    errors={errors?.soDt?.message}
+                                    placeholder="Vui lòng nhập email"
+                                    name="soDt"
+                                />
+                                <Input
+                                    label="Mã nhóm"
+                                    id="maNhom"
+                                    type="text"
+                                    register={register}
+                                    errors={errors?.maNhom?.message}
+                                    placeholder="Vui lòng mã nhóm"
+                                    name="maNhom"
+                                />
+                                <Input
+                                    label="Họ tên"
+                                    id="hoTen"
+                                    type="text"
+                                    register={register}
+                                    errors={errors?.hoTen?.message}
+                                    placeholder="Vui lòng họ tên"
+                                    name="hoTen"
+                                />
                                 <button>Đăng ký</button>
                             </form>
                         </div>

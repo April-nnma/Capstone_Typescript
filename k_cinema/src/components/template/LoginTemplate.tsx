@@ -1,6 +1,25 @@
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Input } from "components";
 import styled from "styled-components";
+import { LoginSchema, LoginSchemaType } from "schema/LoginSchema";
+import { Button } from "antd";
+import {SubmitHandler} from "react-hook-form"
 
 export const LoginTemplate = () => {
+    const {
+        handleSubmit,
+        register,
+        formState: { errors },
+    } = useForm<LoginSchemaType>({
+        mode: "onChange",
+        resolver: zodResolver(LoginSchema),
+    });
+
+    const onSubmit: SubmitHandler<LoginSchemaType> = (value) => {
+        console.log(value)
+    };
+
     return (
         <div className="w-full ">
             <div className="w-5/6  mx-auto grid grid-cols-2 gap-4">
@@ -16,34 +35,36 @@ export const LoginTemplate = () => {
                         </div>
 
                         <div className="form-login-input">
-                            <form>
-                                <div>
-                                    <label
-                                        htmlFor="taiKhoan"
-                                        className="font-bold"
-                                    >
-                                        Tài Khoản
-                                    </label>
-                                    <input
-                                        id="emailPhone"
-                                        type="text"
-                                        placeholder="Tài Khoản"
-                                    />
-                                </div>
-                                <div>
-                                    <label
-                                        htmlFor="password"
-                                        className="font-bold"
-                                    >
-                                        Mật khẩu
-                                    </label>
-                                    <input
-                                        id="password"
-                                        type="password"
-                                        placeholder="Nhập mật khẩu"
-                                    />
-                                </div>
-                                <button>Đăng nhập</button>
+                            <form onSubmit={handleSubmit(onSubmit)}>
+                                <Input
+                                    label="Tài khoản"
+                                    id="taiKhoan"
+                                    type="text"
+                                    register={register}
+                                    errors={errors?.taiKhoan?.message}
+                                    placeholder="Vui lòng nhập tài khoản"
+                                    name="taiKhoan"
+                                />
+                                <Input
+                                    label="Mật Khẩu"
+                                    id="matKhau"
+                                    type="password"
+                                    register={register}
+                                    errors={errors?.matKhau?.message}
+                                    placeholder="Vui lòng nhập mật khẩu"
+                                    name="matKhau"
+                                />
+
+                                <Button
+                                    htmlType="submit"
+                                    type="primary"
+                                    className="!w-full !h-[auto] !py-[13px] mt-6"
+                                    danger
+                                >
+                                    Đăng nhập
+                                </Button>
+
+                                {/* <button>Đăng nhập</button> */}
                             </form>
                         </div>
                     </Login>
@@ -67,6 +88,7 @@ const Login = styled.header`
         form {
             padding: 20px 20px 5px;
             width: 100%;
+
             div {
                 label {
                     display: block;
@@ -81,17 +103,6 @@ const Login = styled.header`
                     border-radius: 2px;
                     box-sizing: border-box;
                 }
-            }
-            button {
-                width: 100%;
-                background-color: #e71a0f;
-                color: white;
-                padding: 14px 20px;
-                margin: 8px 0;
-                border: none;
-                border-radius: 4px;
-                cursor: pointer;
-                text-transform: uppercase;
             }
         }
     }
