@@ -1,44 +1,44 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { HTMLInputTypeAttribute } from 'react'
-import { UseFormRegister } from 'react-hook-form'
+import { HTMLInputTypeAttribute } from "react";
+import { UseFormRegister } from "react-hook-form";
 
-//rafc
 type InputProps = {
-    label?: string
-    id?: string
-    type?: HTMLInputTypeAttribute
-    register?: UseFormRegister<any>
-    error?: string
-    placeholder?: string
-    className?: string
-    name?: string
-}
+    label?: string;
+    id?: string;
+    type?: HTMLInputTypeAttribute;
+    register?: UseFormRegister<any>;
+    errors?: string;
+    placeholder?: string;
+    classNameLabel?: "";
+    classNameError?: "";
+    name?: string;
+};
 
 export const Input = ({
     label,
     id,
+    type = "text",
     register,
-    type = 'text',
-    error,
+    errors,
     placeholder,
-    className = '',
+    // classNameLabel,
+    // classNameError,
     name,
 }: InputProps) => {
     return (
-        <div className={className}>
+        <div>
             {!!label && (
-                <label className="text-white" htmlFor={id}>
+                <label htmlFor={id} className="font-bold">
                     {label}
                 </label>
             )}
             <input
                 id={id}
-                placeholder={placeholder}
                 type={type}
-                className="p-10 mt-8 w-full text-white rounded-6 bg-[#333]"
-                {...register?.(name)}
+                placeholder={placeholder}
+                {...register(name)}
             />
-            {!!error && <p className="text-red-500 text-14">{error}</p>}
+            {!!errors && <p className="text-red-500 text-14">{errors}</p>}
         </div>
-    )
-}
+    );
+};

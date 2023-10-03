@@ -1,56 +1,32 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { UserByAccessToken, UserLogin } from 'types'
-import { getUserByAccessTokenThunk, loginThunk } from '.'
-import { getAccessToken } from 'utils'
+import { createSlice } from "@reduxjs/toolkit";
+import { UserLogin } from "types";
+import { loginThunk } from "./thunk";
 
-type QuanLyNguoiDungInitialState = {
-    accessToken?: string
-    userLogin?: UserLogin | UserByAccessToken
-    isFetchingLogin?: boolean
-}
 
-const initialState: QuanLyNguoiDungInitialState = {
-    accessToken: getAccessToken(),
-    isFetchingLogin: false,
-}
+type quanLyNguoiDungInitialState = {
+    accessToken?: string;
+    userLogin?: UserLogin;
+};
+
+const initialState: quanLyNguoiDungInitialState = {
+    accessToken: localStorage.getItem("ACCESSTOKEN"),
+};
 
 const quanLyNguoiDungSlice = createSlice({
-    name: 'quanLyNguoiDung',
+    name: "quanLyNguoiDung",
     initialState,
-    reducers: {
-        logOut: (state, { payload }: PayloadAction<string>) => {
-            console.log('action: ', payload)
-            state.accessToken = undefined
-            state.userLogin = undefined
-            localStorage.removeItem('ACCESSTOKEN')
-        },
-    }, // xử lý action đồng bộ
+    reducers: {},
     extraReducers(builder) {
-        // xử lý action bất đồng bộ (call API)
-
         builder
-            .addCase(loginThunk.pending, (state) => {
-                state.isFetchingLogin = true
-            })
-            .addCase(loginThunk.rejected, (state) => {
-                state.isFetchingLogin = false
-            })
+            // .addCase(loginThunk.pending, (state, { payload }) => {})
+            // .addCase(loginThunk.rejected, (state, { payload }) => {})
             .addCase(loginThunk.fulfilled, (state, { payload }) => {
-                console.log('payload: ', payload)
-                // lưu accessToken xuống localstorage
-                localStorage.setItem('ACCESSTOKEN', payload.accessToken)
-                state.accessToken = payload.accessToken
-
-                // set lại user
-                state.userLogin = payload
-                state.isFetchingLogin = false
-            })
-
-            .addCase(getUserByAccessTokenThunk.fulfilled, (state, { payload }) => {
-                state.userLogin = payload
+                state.accessToken = payload
             })
     },
-})
+});
 
-export const { actions: quanLyNguoiDungActions, reducer: quanLyNguoiDungReducer } =
-    quanLyNguoiDungSlice
+export const {
+    actions: quanLyNguoiDungActions,
+    reducer: quanLyNguoiDungReducer,
+} = quanLyNguoiDungSlice;

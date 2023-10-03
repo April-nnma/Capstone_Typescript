@@ -1,21 +1,23 @@
-import { Footer, Header } from 'components'
-import { Outlet } from 'react-router-dom'
 import styled from 'styled-components'
+import { Footer, Header, HeaderAuth } from "../ui"
+import { Outlet } from 'react-router-dom'
 
-export const MainLayout = () => {
+export const MainLayout = () =>{
     return (
         <main>
-            <Header />
-            <MainWrapper id="main-content">
-                <Outlet />
+            <HeaderAuth/>
+            <Header/>
+            <MainWrapper>
+                <Outlet/>
             </MainWrapper>
-            <Footer />
+            <Footer/>
         </main>
     )
 }
 
+
 const MainWrapper = styled.div`
-    max-width: var(--max-width);
+    max-width: 80%;
     margin: auto;
     padding: 40px;
 `

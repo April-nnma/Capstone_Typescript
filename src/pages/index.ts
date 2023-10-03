@@ -1,4 +1,3 @@
-export * from './Register'
-export * from './Login'
-export * from './Home'
-export * from './Account'
+export * from "./Home"
+export * from "./Login"
+export * from "./Register"
