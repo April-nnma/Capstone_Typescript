@@ -1,9 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-const initialState = {};
+import { UserLogin } from "types";
 
 type quanLyNguoiDungInitialState = {
-    //
+    accessToken?: string,
+    userLogin?: UserLogin,
+};
+
+const initialState: quanLyNguoiDungInitialState = {
+    accessToken: localStorage.getItem("ACCESSTOKEN")
 };
 
 const quanLyNguoiDungSlice = createSlice({
