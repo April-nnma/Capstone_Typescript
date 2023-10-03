@@ -4,9 +4,13 @@ import { Input } from "components";
 import styled from "styled-components";
 import { LoginSchema, LoginSchemaType } from "schema/LoginSchema";
 import { Button } from "antd";
-import {SubmitHandler} from "react-hook-form"
-import { useAppDispatch } from "store";
+import { SubmitHandler } from "react-hook-form";
+import { RootState, useAppDispatch } from "store";
 import { loginThunk } from "store/quanLyNguoiDung";
+import { Navigate, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { useAuth } from "hooks";
 
 export const LoginTemplate = () => {
     const {
@@ -18,12 +22,33 @@ export const LoginTemplate = () => {
         resolver: zodResolver(LoginSchema),
     });
 
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    const { isFetchingLogin } = useSelector(
+        (state: RootState) => state.quanLyNguoiDung
+    );
 
     const onSubmit: SubmitHandler<LoginSchemaType> = (value) => {
-        console.log(value)
+        console.log(value);
         dispatch(loginThunk(value))
+            .unwrap()
+            .then(() => {
+                //xử lý thành công
+                navigate("/");
+                toast.success("Đăng nhập thành công");
+            })
+            .catch(() => {
+                //xử lý thất bại
+            });
     };
+
+    // const { accessToken } = useSelector(
+    //     (state: RootState) => state.quanLyNguoiDung
+    // );
+    const {accessToken} = useAuth() 
+    if (accessToken) {
+        return <Navigate to="/" />;
+    }
 
     return (
         <div className="w-full ">
@@ -65,11 +90,10 @@ export const LoginTemplate = () => {
                                     type="primary"
                                     className="!w-full !h-[auto] !py-[13px] mt-6"
                                     danger
+                                    loading={isFetchingLogin}
                                 >
                                     Đăng nhập
                                 </Button>
-
-                                {/* <button>Đăng nhập</button> */}
                             </form>
                         </div>
                     </Login>

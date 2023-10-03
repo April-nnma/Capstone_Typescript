@@ -1,7 +1,10 @@
 import styled from "styled-components";
 import { Carousel } from "antd";
 
+
 export const HomeTemplate = () => {
+
+
     return (
         <MainContainer>
             <div className="std">

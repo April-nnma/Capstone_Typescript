@@ -4,6 +4,6 @@ export type UserLogin = {
     email: string,
     soDt: string,
     maNhom: string,
-    maLoaiNguoiDung: "Khach Hang" | "Quan Tri"
+    maLoaiNguoiDung: "Khach Hang" | "Quan Tri",
     accessToken: string
 }
