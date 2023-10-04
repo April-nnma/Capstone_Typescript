@@ -1,6 +1,6 @@
 import { apiInstance } from "constant/apiInstance";
 import { LoginSchemaType, RegisterSchemaType } from "schema";
-import { UserLogin } from "types";
+import { UserByAccessToken, UserLogin } from "types";
 
 
 const api = apiInstance({
@@ -11,4 +11,6 @@ export const quanLyNguoiDungServices = {
     register: (data: RegisterSchemaType) => api.post("/DangKy", data),
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     login: (data: LoginSchemaType) => api.post<ApiResponse<UserLogin>>("/DangNhap", data),
+
+    getUserByAccessToken: ()=>api.post<ApiResponse<UserByAccessToken>>('ThongTinTaiKhoan')
 };

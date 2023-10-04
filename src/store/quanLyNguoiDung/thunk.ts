@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { LoginSchemaType } from "schema";
 import { quanLyNguoiDungServices } from "services";
-import { sleep } from "utils";
+import { getAccessToken, sleep } from "utils";
 
 export const loginThunk = createAsyncThunk(
     "quanLyNguoiDung/login",
@@ -19,3 +19,18 @@ export const loginThunk = createAsyncThunk(
         }
     }
 );
+
+export const getUserByAccessTokenThunk= createAsyncThunk(
+    "quanLyNguoiDung/getUserByAccessToken",
+    async (_,{rejectWithValue}) =>{
+        try {
+            const token = getAccessToken()
+            if(token){
+                const data = await quanLyNguoiDungServices.getUserByAccessToken()
+                return data.data.content
+            }
+        } catch (error) {
+            return rejectWithValue(error);
+        }
+    }
+)

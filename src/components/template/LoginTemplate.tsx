@@ -11,6 +11,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useAuth } from "hooks";
+import { handleErrors } from "utils";
 
 export const LoginTemplate = () => {
     const {
@@ -37,15 +38,16 @@ export const LoginTemplate = () => {
                 navigate("/");
                 toast.success("Đăng nhập thành công");
             })
-            .catch(() => {
+            .catch((error) => {
                 //xử lý thất bại
+                handleErrors(error);
             });
     };
 
     // const { accessToken } = useSelector(
     //     (state: RootState) => state.quanLyNguoiDung
     // );
-    const {accessToken} = useAuth() 
+    const { accessToken } = useAuth();
     if (accessToken) {
         return <Navigate to="/" />;
     }

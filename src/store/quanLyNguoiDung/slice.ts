@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { UserLogin } from "types";
 import { loginThunk } from "./thunk";
+import { getAccessToken } from "utils";
 
 type quanLyNguoiDungInitialState = {
     accessToken?: string;
@@ -9,7 +10,7 @@ type quanLyNguoiDungInitialState = {
 };
 
 const initialState: quanLyNguoiDungInitialState = {
-    accessToken: localStorage.getItem("ACCESSTOKEN"),
+    accessToken: getAccessToken(),
     isFetchingLogin: false,
 };
 
@@ -27,6 +28,9 @@ const quanLyNguoiDungSlice = createSlice({
             })
             .addCase(loginThunk.fulfilled, (state, { payload }) => {
                 localStorage.setItem("ACCESSTOKEN", payload.accessToken);
+                state.accessToken = payload.accessToken;
+
+                //set lại user
                 state.userLogin = payload;
                 state.isFetchingLogin = true;
             });
