@@ -5,8 +5,6 @@ import { useEffect } from "react";
 import { getBannerListThunk, getMovieListThunk } from "store/quanLyPhim";
 import { useSelector } from "react-redux";
 import { Card, Carousel } from "components";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
 
 
 export const HomeTemplate = () => {
@@ -66,7 +64,7 @@ export const HomeTemplate = () => {
                     </div>
                 </div>
             </div>
-            
+            <div className="slideshow-container">
                 <Carousel autoplay>
                     {bannerList?.map((banner) => (
                         <div key={banner.maBanner}>
@@ -78,7 +76,7 @@ export const HomeTemplate = () => {
                         </div>
                     ))}
                 </Carousel>
-           
+            </div>
 
             <div>
                 {movieList?.map((movie) => (
