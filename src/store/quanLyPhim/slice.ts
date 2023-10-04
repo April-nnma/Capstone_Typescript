@@ -1,31 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { Movie } from 'types'
-import { getMovieListThunk } from '.'
+import { createSlice } from "@reduxjs/toolkit";
+import { Banner, Movie } from "types";
 
 type QuanLyPhimInitialState = {
-    movieList?: Movie[]
-    isFetchingMovieList?: boolean
-}
+    movieList?: Movie[];
+    bannerList?: Banner[];
+};
 
-const initialState: QuanLyPhimInitialState = {}
+const initialState: QuanLyPhimInitialState = {};
 
 const quanLyPhimSlice = createSlice({
-    name: 'quanLyPhim',
+    name: "quanLyPhim",
     initialState,
     reducers: {},
-    extraReducers(builder) {
-        builder
-            .addCase(getMovieListThunk.pending, (state) => {
-                state.isFetchingMovieList = true
-            })
-            .addCase(getMovieListThunk.fulfilled, (state, { payload }) => {
-                state.movieList = payload
-                state.isFetchingMovieList = false
-            })
-            .addCase(getMovieListThunk.rejected, (state) => {
-                state.isFetchingMovieList = false
-            })
-    },
-})
+    extraReducers() {},
+});
 
-export const { actions: quanLyPhimActions, reducer: quanLyPhimReducer } = quanLyPhimSlice
+export const {actions: quanLyPhimActions, reducer: quanLyPhimReducer} = quanLyPhimSlice

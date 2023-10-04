@@ -1,16 +1,28 @@
-import { createAsyncThunk } from '@reduxjs/toolkit'
-import { quanLyPhimServices } from 'services/quanLyPhim'
-import { sleep } from 'utils'
+import { createAsyncThunk } from "@reduxjs/toolkit";
+
+import { quanLyPhimServices } from "services";
+
 
 export const getMovieListThunk = createAsyncThunk(
-    'quanLyPhim/getMovieList',
+    "quanLyPhim/getMovieList",
     async (_, { rejectWithValue }) => {
         try {
-            const data = await quanLyPhimServices.getMovieList('?maNhom=GP08')
-            await sleep(2000)
-            return data.data.content
-        } catch (err) {
-            return rejectWithValue(err)
+            const data = await quanLyPhimServices.getMovieList();
+            return data.data.content;
+        } catch (error) {
+            return rejectWithValue(error);
         }
     }
-)
+);
+
+export const getBannerListThunk = createAsyncThunk(
+    "quanLyPhim/getBannerList",
+    async (_, { rejectWithValue }) => {
+        try {
+            const data = await quanLyPhimServices.getBannerList();
+            return data.data.content;
+        } catch (error) {
+            return rejectWithValue(error);
+        }
+    }
+);

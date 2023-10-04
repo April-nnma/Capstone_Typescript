@@ -1,9 +1,15 @@
 import styled from "styled-components";
 import { Carousel } from "antd";
-
+import { useAppDispatch } from "store";
+import { useEffect } from "react";
+import { getMovieListThunk } from "store/quanLyPhim";
 
 export const HomeTemplate = () => {
+    const dispatch = useAppDispatch();
 
+    useEffect(() => {
+        dispatch(getMovieListThunk());
+    }, [dispatch]);
 
     return (
         <MainContainer>

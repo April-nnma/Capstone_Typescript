@@ -30,7 +30,7 @@ export const LoginTemplate = () => {
     );
 
     const onSubmit: SubmitHandler<LoginSchemaType> = (value) => {
-        console.log(value);
+        // console.log(value);
         dispatch(loginThunk(value))
             .unwrap()
             .then(() => {

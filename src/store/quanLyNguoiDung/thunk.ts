@@ -12,7 +12,7 @@ export const loginThunk = createAsyncThunk(
             // await new Promise(resolve => setTimeout(resolve, 2500))
 
             await sleep(2500)
-            console.log("data: ", data.data.content);
+            // console.log("data: ", data.data.content);
             return data.data.content
         } catch (error) {
             return rejectWithValue(error);

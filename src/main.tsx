@@ -11,17 +11,23 @@ import { StyleProvider } from "@ant-design/cssinjs";
 //redux
 import { Provider } from "react-redux";
 import { store } from "store";
-
+import { ConfigProvider } from "antd";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
     //<React.StrictMode>
     <BrowserRouter>
         <ToastContainer />
-        <StyleProvider hashPriority="high">
-            <Provider store={store}>
-                <App />
-            </Provider>
-        </StyleProvider>
+        <ConfigProvider theme={{
+            token: {
+                colorPrimary: '#e50914'
+            }
+        }}>
+            <StyleProvider hashPriority="high">
+                <Provider store={store}>
+                    <App />
+                </Provider>
+            </StyleProvider>
+        </ConfigProvider>
     </BrowserRouter>
 
     // </React.StrictMode>,

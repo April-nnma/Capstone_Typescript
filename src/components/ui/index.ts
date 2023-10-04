@@ -3,4 +3,5 @@ export * from "./Header";
 export * from "./Footer";
 export * from "./Input";
 export * from "./Button";
-export * from "./Avatar"
+export * from "./Avatar";
+export * from "./Popover";
