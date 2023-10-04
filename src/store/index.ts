@@ -2,6 +2,10 @@ import { configureStore } from "@reduxjs/toolkit";
 import { rootReducer } from "./rootReducer";
 import { useDispatch } from "react-redux";
 import { getUserByAccessTokenThunk } from "./quanLyNguoiDung";
+export * from "./quanLyNguoiDung"
+
+export * from "./quanLyPhim"
+
 export const store = configureStore({
     reducer: rootReducer,
 });

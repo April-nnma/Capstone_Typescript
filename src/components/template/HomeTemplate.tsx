@@ -1,14 +1,24 @@
 import styled from "styled-components";
-import { Carousel } from "antd";
-import { useAppDispatch } from "store";
+
+import { RootState, useAppDispatch } from "store";
 import { useEffect } from "react";
-import { getMovieListThunk } from "store/quanLyPhim";
+import { getBannerListThunk, getMovieListThunk } from "store/quanLyPhim";
+import { useSelector } from "react-redux";
+import { Card, Carousel } from "components";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+
 
 export const HomeTemplate = () => {
     const dispatch = useAppDispatch();
+    const { bannerList, isFetchingMovieList, movieList } = useSelector(
+        (state: RootState) => state.quanLyPhim
+    );
+    console.log("bannerList: ", bannerList);
 
     useEffect(() => {
         dispatch(getMovieListThunk());
+        dispatch(getBannerListThunk());
     }, [dispatch]);
 
     return (
@@ -56,23 +66,36 @@ export const HomeTemplate = () => {
                     </div>
                 </div>
             </div>
-            <div className="slideshow-container"></div>
-            <Carousel autoplay>
-                <div>
-                    <h3 style={contentStyle}>
-                        <img src="/images/bg-bottom-footer.jpg" alt="" />
-                    </h3>
-                </div>
-                <div>
-                    <h3 style={contentStyle}>2</h3>
-                </div>
-                <div>
-                    <h3 style={contentStyle}>3</h3>
-                </div>
-                <div>
-                    <h3 style={contentStyle}>4</h3>
-                </div>
-            </Carousel>
+            
+                <Carousel autoplay>
+                    {bannerList?.map((banner) => (
+                        <div key={banner.maBanner}>
+                            <img
+                                src={banner.hinhAnh}
+                                alt={`Banner ${banner.maPhim}`}
+                                style={contentStyle} // Đảm bảo hình ảnh hiển thị full width
+                            />
+                        </div>
+                    ))}
+                </Carousel>
+           
+
+            <div>
+                {movieList?.map((movie) => (
+                    <div>
+                        <Card
+                            hoverable
+                            style={{ width: 240 }}
+                            cover={<img alt="example" src={movie.hinhAnh} />}
+                        >
+                            <Card.Meta
+                                title={movie.tenPhim}
+                                description={movie.moTa}
+                            />
+                        </Card>
+                    </div>
+                ))}
+            </div>
         </MainContainer>
     );
 };
@@ -140,4 +163,5 @@ const contentStyle: React.CSSProperties = {
     lineHeight: "160px",
     textAlign: "center",
     background: "#364d79",
+    width: "100%"
 };
