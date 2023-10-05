@@ -93,7 +93,7 @@ export const Header = () => {
 };
 
 const PageHearderContainer = styled.header`
-    width: 50%;
+    width: 60%;
     margin: 0px auto;
     height: 135px;
 

@@ -13,10 +13,10 @@ export const apiInstance = (config?: CreateAxiosDefaults) => {
             headers: {
                 ///nhận token cyberSoft
                 TokenCybersoft,
-                Authorization: "Bearer" + getAccessToken() || "",
+                Authorization: "Bearer" + " " + getAccessToken() || "",
             } as unknown as AxiosRequestHeaders,
         };
     });
 
-    return api
+    return api;
 };

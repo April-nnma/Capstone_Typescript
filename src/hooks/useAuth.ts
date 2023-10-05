@@ -10,8 +10,8 @@ export const useAuth = () => {
 
     useEffect(() => {
         !userLogin &&  dispatch(getUserByAccessTokenThunk())
-    }, []);
-    
+    }, [userLogin,dispatch]);
+
     return {
         accessToken,
         user : userLogin
