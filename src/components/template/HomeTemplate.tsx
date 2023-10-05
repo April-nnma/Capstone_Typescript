@@ -13,10 +13,10 @@ export const HomeTemplate = () => {
     const { bannerList, isFetchingMovieList, movieList } = useSelector(
         (state: RootState) => state.quanLyPhim
 );
-    console.log("bannerList: ", bannerList);
+    // console.log("bannerList: ", bannerList);
 
     useEffect(() => {
-        dispatch(getMovieListThunk());
+        dispatch(getMovieListThunk({ a: "GP08", b: "GP03" }));
         dispatch(getBannerListThunk());
     }, [dispatch]);
 

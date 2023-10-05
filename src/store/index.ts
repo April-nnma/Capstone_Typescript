@@ -3,8 +3,9 @@ import { rootReducer } from "./rootReducer";
 import { useDispatch } from "react-redux";
 import { getUserByAccessTokenThunk } from "./quanLyNguoiDung";
 export * from "./quanLyNguoiDung"
-
 export * from "./quanLyPhim"
+export * from "./quanLyRap"
+export * from "./quanLyDatVe"
 
 export const store = configureStore({
     reducer: rootReducer,

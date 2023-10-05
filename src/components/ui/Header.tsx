@@ -110,7 +110,7 @@ const PageHearderContainer = styled.header`
     }
     .header-nav {
         display: block;
-        left: 650px;
+        left: 476px;
         position: absolute;
         top: 100px;
         .nav {

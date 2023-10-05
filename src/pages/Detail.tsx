@@ -1,6 +1,7 @@
+import { DetailTemplate } from "components"
 
 export const Detail = () => {
   return (
-    <div>Detail</div>
+    <div><DetailTemplate/></div>
   )
 }
