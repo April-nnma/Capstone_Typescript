@@ -30,8 +30,10 @@ export const BookingTemplate = () => {
     return (
         <div className="bookingChair">
             <div className="px-[10px] sm:px-[100px] lg:px-[250px] xl:px-[350px]">
-                <div className="manHinh mb-[50px]"></div>
-                <div className="grid grid-cols-12 px-[40px] gap-10">
+                <div className="manHinh mb-[50px] bg-black text-white text-center" >
+                  Screen
+                </div>
+                <div className="grid grid-cols-12 gap-10">
                     {boxOfficeList?.danhSachGhe?.map((v) => {
                         return (
                             <Chair key={v.tenGhe}>
@@ -115,7 +117,7 @@ export const BookingTemplate = () => {
                                             danhSachVe,
                                         })
                                     )
-                                        .unwrap() 
+                                        .unwrap()
                                         .then(() => {
                                             toast.success("Đặt vé thành công");
                                             sleep(2000);
