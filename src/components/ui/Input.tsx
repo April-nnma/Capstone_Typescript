@@ -9,9 +9,11 @@ type InputProps = {
     register?: UseFormRegister<any>;
     errors?: string;
     placeholder?: string;
-    classNameLabel?: "";
-    classNameError?: "";
+    className?: string;
+    classNameLabel?: string;
+    classNameError?: string;
     name?: string;
+    onChange?: void;
 };
 
 export const Input = ({
@@ -21,9 +23,11 @@ export const Input = ({
     register,
     errors,
     placeholder,
-    // classNameLabel,
-    // classNameError,
     name,
+    onChange,
+    className,
+    classNameLabel,
+    classNameError,
 }: InputProps) => {
     return (
         <div>
@@ -36,7 +40,8 @@ export const Input = ({
                 id={id}
                 type={type}
                 placeholder={placeholder}
-                {...register(name)}
+                onChange={onChange}
+                {...register?.(name)}
             />
             {!!errors && <p className="text-red-500 text-14">{errors}</p>}
         </div>

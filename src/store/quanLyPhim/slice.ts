@@ -1,31 +1,38 @@
-import { createSlice } from '@reduxjs/toolkit'
-import { Movie } from 'types'
-import { getMovieListThunk } from '.'
+import { createSlice } from "@reduxjs/toolkit";
+import { Banner, Movie } from "types";
+import { getBannerListThunk, getMovieListThunk } from ".";
 
 type QuanLyPhimInitialState = {
-    movieList?: Movie[]
-    isFetchingMovieList?: boolean
-}
+    movieList?: Movie[];
+    isFetchingMovieList?: boolean;
+    bannerList?: Banner[];
+};
 
-const initialState: QuanLyPhimInitialState = {}
+const initialState: QuanLyPhimInitialState = {};
 
 const quanLyPhimSlice = createSlice({
-    name: 'quanLyPhim',
+    name: "quanLyPhim",
     initialState,
     reducers: {},
     extraReducers(builder) {
         builder
             .addCase(getMovieListThunk.pending, (state) => {
-                state.isFetchingMovieList = true
+                state.isFetchingMovieList = true;
             })
             .addCase(getMovieListThunk.fulfilled, (state, { payload }) => {
-                state.movieList = payload
-                state.isFetchingMovieList = false
+                state.movieList = payload;
+                state.isFetchingMovieList = false;
             })
             .addCase(getMovieListThunk.rejected, (state) => {
-                state.isFetchingMovieList = false
+                state.isFetchingMovieList = false;
             })
-    },
-})
+            .addCase(getBannerListThunk.fulfilled, (state, { payload }) => {
+                state.bannerList = payload;
+                console.log("bannerList: ", state.bannerList);
 
-export const { actions: quanLyPhimActions, reducer: quanLyPhimReducer } = quanLyPhimSlice
+            });
+    },
+});
+
+export const { actions: quanLyPhimActions, reducer: quanLyPhimReducer } =
+    quanLyPhimSlice;

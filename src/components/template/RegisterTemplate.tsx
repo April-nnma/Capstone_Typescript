@@ -42,7 +42,11 @@ export const RegisterTemplate = () => {
                     <Register>
                         <div className=" bg-red-600">
                             <h2 className="font-bold mx-auto text-white">
-                                <span className="form-login  mx-20">
+                                <span className="form-login mx-20 cursor-pointer"
+                                onClick={()=>{
+                                    navigate(PATH.login)
+                                }}
+                                >
                                     Đăng nhập
                                 </span>
                                 <span className="form-register active">

@@ -1,14 +1,14 @@
-import { isAxiosError } from "axios"
-import {toast} from "react-toastify"
+import { isAxiosError } from "axios";
+import { toast } from "react-toastify";
 /**
- * 
- * @param error any 
+ *
+ * @param error any
  * @param message string
  * @description show toast message or error
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const handleErrors = (error?: any, message?: string) => {
-    if(isAxiosError<{content: string}>(error)){
-        toast.error(message||error.response.data.content)
+    if (isAxiosError<{ content: string }>(error)) {
+        toast.error(message || error.response.data.content);
     }
-}
+};

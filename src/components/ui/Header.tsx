@@ -1,11 +1,15 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 // import { NavLink } from "react-router-dom";
 
 export const Header = () => {
+    const navigate = useNavigate()
     return (
         <div className="bg-header bg-contain">
             <PageHearderContainer>
-                <a className="logo" href="">
+                <a className="logo" href="" onClick={()=>{
+                    navigate("/")
+                }}>
                     <img
                         src="/images/cgvlogo.png"
                         alt="CGV Cinemas"
@@ -89,7 +93,7 @@ export const Header = () => {
 };
 
 const PageHearderContainer = styled.header`
-    width: 50%;
+    width: 60%;
     margin: 0px auto;
     height: 135px;
 
@@ -106,7 +110,7 @@ const PageHearderContainer = styled.header`
     }
     .header-nav {
         display: block;
-        left: 650px;
+        left: 476px;
         position: absolute;
         top: 100px;
         .nav {

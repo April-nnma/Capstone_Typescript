@@ -30,7 +30,7 @@
       "services": ["services"],
       "utils": ["utils"],
       "store": ["store"],
-      // "types": ["types"]
+      "hooks": ["hooks"]
     }
   },
   "include": ["src"],
