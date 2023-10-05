@@ -10,7 +10,8 @@ import { quanLyNguoiDungActions } from "store/quanLyNguoiDung";
 export const HeaderAuth = () => {
     const navigate = useNavigate();
     const { accessToken, user } = useAuth();
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
+    
     return (
         <div>
             {!accessToken && (
