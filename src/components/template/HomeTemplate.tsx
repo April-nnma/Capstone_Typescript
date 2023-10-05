@@ -1,23 +1,40 @@
 import styled from "styled-components";
-
+import { generatePath, useNavigate } from "react-router-dom";
 import { RootState, useAppDispatch } from "store";
 import { useEffect } from "react";
 import { getBannerListThunk, getMovieListThunk } from "store/quanLyPhim";
 import { useSelector } from "react-redux";
-import { Card, Carousel } from "components";
-
+import { Card, Carousel, Skeleton } from "components";
+import { PATH } from "constant";
 
 export const HomeTemplate = () => {
+    const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const { bannerList, isFetchingMovieList, movieList } = useSelector(
         (state: RootState) => state.quanLyPhim
-    );
+);
     console.log("bannerList: ", bannerList);
 
     useEffect(() => {
         dispatch(getMovieListThunk());
         dispatch(getBannerListThunk());
     }, [dispatch]);
+
+    if (isFetchingMovieList) {
+        return (
+            <div className="grid grid-cols-4">
+                {[...Array(12)].map(() => {
+                    return (
+                        <Card className="!w-[300px]">
+                            <Skeleton.Image className="!w-full !h-[250px]" />
+                            <Skeleton.Input className="!w-full !mt-16" />
+                            <Skeleton.Input className="!w-full !mt-16" />
+                        </Card>
+                    );
+                })}
+            </div>
+        );
+    }
 
     return (
         <MainContainer>
@@ -78,21 +95,49 @@ export const HomeTemplate = () => {
                 </Carousel>
             </div>
 
-            <div>
-                {movieList?.map((movie) => (
-                    <div>
+            <div className="movie-section">
+                <div className="title m-auto">
+                    <p className="text-center font-700 text-[90px]">
+                        Movie Select
+                    </p>
+                </div>
+                <div className=" grid grid-cols-4">
+                    {movieList?.map((movie) => (
                         <Card
                             hoverable
+                            key={movie.maPhim}
                             style={{ width: 240 }}
-                            cover={<img alt="example" src={movie.hinhAnh} />}
+                            cover={
+                                <img
+                                    alt="example"
+                                    src={movie.hinhAnh}
+                                    className="h-80"
+                                />
+                            }
+                            className="!mt-16 cursor-pointer"
                         >
                             <Card.Meta
+                                className=" h-32"
                                 title={movie.tenPhim}
-                                description={movie.moTa}
+                                description={movie.moTa.substring(0, 30)}
                             />
+                            <button
+                                className="text-center border border-gray-400 p-1 cursor-pointer hover:border-black transition shadow-xl rounded-10 !text-gray-600"
+                                onClick={() => {
+                                    const path = generatePath(
+                                        PATH.detail,
+                                        {
+                                            movieID: movie.maPhim,
+                                        }
+                                    );
+                                    navigate(path);
+                                }}
+                            >
+                                Chi tiết phim
+                            </button>
                         </Card>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </MainContainer>
     );
@@ -156,10 +201,10 @@ const MainContainer = styled.header`
 `;
 
 const contentStyle: React.CSSProperties = {
-    height: "450px",
+    height: "500px",
     color: "#fff",
     lineHeight: "160px",
     textAlign: "center",
     background: "#364d79",
-    width: "100%"
+    width: "100%",
 };

@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { quanLyPhimServices } from "services";
+import { sleep } from "utils";
 
 
 export const getMovieListThunk = createAsyncThunk(
@@ -8,6 +9,7 @@ export const getMovieListThunk = createAsyncThunk(
     async (_, { rejectWithValue }) => {
         try {
             const data = await quanLyPhimServices.getMovieList('?maNhom=GP08');
+            await sleep(1000)
             return data.data.content;
         } catch (error) {
             return rejectWithValue(error);

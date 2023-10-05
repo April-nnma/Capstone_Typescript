@@ -12,6 +12,7 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useAuth } from "hooks";
 import { handleErrors } from "utils";
+import { PATH } from "constant";
 
 export const LoginTemplate = () => {
     const {
@@ -62,7 +63,9 @@ export const LoginTemplate = () => {
                                 <span className="form-login active mx-20">
                                     Đăng nhập
                                 </span>
-                                <span className="form-register">Đăng ký</span>
+                                <span className="form-register cursor-pointer" onClick={()=>{
+                                    navigate(PATH.register)
+                                }}>Đăng ký</span>
                             </h2>
                         </div>
 

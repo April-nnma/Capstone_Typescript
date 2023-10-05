@@ -1,16 +1,14 @@
-import { apiInstance } from "constant/apiInstance";
+import { apiInstance } from "constant";
 import { LoginSchemaType, RegisterSchemaType } from "schema";
-import { UserByAccessToken, UserLogin } from "types";
-
+import { Update, UserByAccessToken, UserLogin } from "types";
 
 const api = apiInstance({
-    baseURL: import.meta.env.VITE_QUAN_LY_NGUOI_DUNG_API
+    baseURL: import.meta.env.VITE_QUAN_LY_NGUOI_DUNG_API,
 });
 export const quanLyNguoiDungServices = {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     register: (data: RegisterSchemaType) => api.post("/DangKy", data),
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     login: (data: LoginSchemaType) => api.post<ApiResponse<UserLogin>>("/DangNhap", data),
-
-    getUserByAccessToken: ()=>api.post<ApiResponse<UserByAccessToken>>('ThongTinTaiKhoan')
+    getUserByAccessToken : ()=> api.post<ApiResponse<UserByAccessToken>>("/ThongTinTaiKhoan"),
+    // getHistoryBooking : ()=> api.post<ApiResponse<HistoRyBooking>>("/ThongTinTaiKhoan"),
+    updateAccount: (value: Update) => api.put<ApiResponse<Update>>('/CapNhatThongTinNguoiDung',value)
 };

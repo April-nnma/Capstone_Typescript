@@ -1,11 +1,15 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 // import { NavLink } from "react-router-dom";
 
 export const Header = () => {
+    const navigate = useNavigate()
     return (
         <div className="bg-header bg-contain">
             <PageHearderContainer>
-                <a className="logo" href="">
+                <a className="logo" href="" onClick={()=>{
+                    navigate("/")
+                }}>
                     <img
                         src="/images/cgvlogo.png"
                         alt="CGV Cinemas"

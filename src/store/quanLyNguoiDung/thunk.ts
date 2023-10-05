@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { LoginSchemaType } from "schema";
 import { quanLyNguoiDungServices } from "services";
+import { Update } from "types";
 import { getAccessToken, sleep } from "utils";
 
 export const loginThunk = createAsyncThunk(
@@ -31,6 +32,18 @@ export const getUserByAccessTokenThunk= createAsyncThunk(
             }
         } catch (error) {
             return rejectWithValue(error);
+        }
+    }
+)
+
+export const putUpdateInfoThunk = createAsyncThunk(
+    "quanLyNguoiDung/putUpdateInfo",
+    async(payload : Update, {rejectWithValue}) => {
+        try {
+            const data = await quanLyNguoiDungServices.updateAccount(payload)
+            return data.data.content
+        } catch(err) {
+            return rejectWithValue(err)
         }
     }
 )

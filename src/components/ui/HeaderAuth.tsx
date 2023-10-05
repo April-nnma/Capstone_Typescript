@@ -37,13 +37,14 @@ export const HeaderAuth = () => {
                             <div>
                                 <p className="font-500 text-16">{user?.hoTen}</p>
                                 <hr className="my-16" />
-                                <p className="text-16 cursor-pointer">Thông tin tài khoản</p>
+                                <p className="text-16 cursor-pointer"
+                                    onClick={() => { navigate(PATH.account) }}>Thông tin tài khoản</p>
                                 <hr className="my-16" />
-                                <Button 
+                                <Button
                                     type="primary"
                                     className="!w-full !h-[auto] !py-[13px] mt-6"
-                                    onClick={()=>dispatch(quanLyNguoiDungActions.logOut(''))}
-                                    >
+                                    onClick={() => dispatch(quanLyNguoiDungActions.logOut(''))}
+                                >
                                     <i className="fa-solid fa-right-from-bracket mr-5"></i>
                                     <span>Đăng xuất</span>
                                 </Button>

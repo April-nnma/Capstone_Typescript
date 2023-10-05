@@ -1,16 +1,26 @@
 export type UserLogin = {
     taiKhoan: string;
-    hoTen: string;
+    hoTen: string;    
     email: string;
-    soDt: string;
+    soDT: string;
     maNhom: string;
-    maLoaiNguoiDung: "Khach Hang" | "Quan Tri";
+    maLoaiNguoiDung: "KhachHang" | "QuanTri";
     accessToken: string;
 };
 
 export type UserByAccessToken = Omit<UserLogin, "accessToken"> & {
     loaiNguoiDung: {
-        maLoaiNguoiDung: "Khach Hang" | "Quan Tri";
+        maLoaiNguoiDung: "KhachHang" | "QuanTri";
     };
-    thongTinDatVe?: [];
+
+};
+
+export type Update = {
+    taiKhoan: string;
+    matKhau: string;
+    email: string;
+    soDt: string;
+    maNhom: string;
+    maLoaiNguoiDung: string;
+    hoTen: string;
 };
