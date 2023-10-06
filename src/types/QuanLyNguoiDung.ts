@@ -21,6 +21,6 @@ export type UpdateUser = {
   email: string;
   soDt: string;
   maNhom: string;
-  maLoaiNguoiDung: "KhachHang";
+  maLoaiNguoiDung: string;
   hoTen: string;
 };
