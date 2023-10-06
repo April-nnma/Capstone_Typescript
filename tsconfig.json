@@ -21,8 +21,8 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": "./src",
     "paths": {
-      "assets" : ["assets"],
-      "components":["components"],
+      "assets": ["assets"],
+      "components": ["components"],
       "constant": ["constant"],
       "pages": ["pages"],
       "router": ["router"],
