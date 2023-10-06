@@ -48,7 +48,7 @@ const quanLyNguoiDungSlice = createSlice({
             .addCase(
                 getUserByAccessTokenThunk.fulfilled,
                 (state, { payload }) => {
-                    console.log(payload);
+                    // console.log(payload);
                     
                     state.userLogin = payload;
                 }
