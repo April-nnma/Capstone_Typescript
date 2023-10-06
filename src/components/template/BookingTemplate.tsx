@@ -27,10 +27,32 @@ export const BookingTemplate = () => {
   useEffect(() => {
     dispatch(getBoxOfficeList(Number(id)));
   }, [dispatch, id]);
+  //   return (
+  //     <div className="bookingChair">
+  //       <div className="px-[10px] sm:px-[100px] lg:px-[250px] xl:px-[350px]">
+  //         <div className="manHinh mb-[50px] bg-black text-white text-center">
+  //           Screen
+  //         </div>
+  const manHinhStyles = {
+    backgroundColor: "orange",
+    transform: "perspective(800px) rotateX(30deg)",
+    boxShadow: "0 20px 20px 0px",
+    width: "80%",
+    margin: "0 auto",
+    padding: "20px",
+    fontWeight: "bold",
+    textTransform: "uppercase",
+    letterSpacing: "1px",
+  };
+
   return (
     <div className="bookingChair">
       <div className="px-[10px] sm:px-[100px] lg:px-[250px] xl:px-[350px]">
-        <div className="manHinh mb-[50px] bg-black text-white text-center">
+        <div
+          className="manHinh "
+          //   mb-[50px] bg-black text-white text-center
+          style={{ manHinhStyles }}
+        >
           Screen
         </div>
         <div className="grid grid-cols-12 gap-10">
