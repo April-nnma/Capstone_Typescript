@@ -1,6 +1,6 @@
 export type UserLogin = {
     taiKhoan: string;
-    hoTen: string;    
+    hoTen: string;
     email: string;
     soDT: string;
     maNhom: string;
@@ -12,7 +12,6 @@ export type UserByAccessToken = Omit<UserLogin, "accessToken"> & {
     loaiNguoiDung: {
         maLoaiNguoiDung: "KhachHang" | "QuanTri";
     };
-
 };
 
 export type Update = {

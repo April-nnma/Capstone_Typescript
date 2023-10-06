@@ -25,9 +25,9 @@ export const Input = ({
     placeholder,
     name,
     onChange,
-    className,
-    classNameLabel,
-    classNameError,
+    // className,
+    // classNameLabel,
+    // classNameError,
 }: InputProps) => {
     return (
         <div>

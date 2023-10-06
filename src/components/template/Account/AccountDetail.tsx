@@ -6,8 +6,9 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { AccountSchema, AccountSchemaType } from "schema";
 import { putUpdateInfoThunk, useAppDispatch } from "store";
-import { Update } from "types";
+
 import styled from "styled-components";
+import { Update } from "types";
 
 export const AccountDetail = () => {
     const dispatch = useAppDispatch();
