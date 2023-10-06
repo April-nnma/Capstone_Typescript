@@ -166,7 +166,7 @@ const MainContainer = styled.header`
                         border-left: 1px solid #222;
                         vertical-align: baseline;
                         a {
-                            background: url("public/images/bg-header-transparent-home.png");
+                            background: url("images/bg-header-transparent-home.png");
                             display: block;
                             height: 90px;
                             text-indent: -9999px;
