@@ -14,3 +14,13 @@ export type UserByAccessToken = Omit<UserLogin, "accessToken"> & {
     maLoaiNguoiDung: "KhachHang" | "QuanTri";
   };
 };
+
+export type UpdateUser = {
+  taiKhoan: string;
+  matKhau: string;
+  email: string;
+  soDt: string;
+  maNhom: string;
+  maLoaiNguoiDung: "KhachHang";
+  hoTen: string;
+};
